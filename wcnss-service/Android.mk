@@ -51,15 +51,17 @@ ifeq ($(PRODUCT_VENDOR_MOVE_ENABLED),true)
 LOCAL_VENDOR_MODULE := true
 endif
 
+ifeq ($(filter 10% Q% q%,$(TARGET_PLATFORM_VERSION)),)
+#For Android R and above, assuming not compiling on Q and lower
+LOCAL_HEADER_LIBRARIES += libqmi_common_headers
+else
 LOCAL_C_INCLUDES += $(TARGET_OUT_HEADERS)/qmi-framework/inc
-LOCAL_C_INCLUDES += $(TARGET_OUT_HEADERS)/qmi/services
-LOCAL_C_INCLUDES += $(TARGET_OUT_HEADERS)/qmi/platform
-LOCAL_C_INCLUDES += $(TARGET_OUT_HEADERS)/qmi/inc
-LOCAL_SHARED_LIBRARIES := libc libcutils libutils liblog
+endif
 LOCAL_SHARED_LIBRARIES += libqmiservices libqmi_cci
 LOCAL_C_INCLUDES += $(TARGET_OUT_HEADERS)/libmdmdetect/inc
 LOCAL_SHARED_LIBRARIES += libmdmdetect
 LOCAL_HEADER_LIBRARIES += libril-qc-qmi-services-headers
+LOCAL_HEADER_LIBRARIES += libmdmdetect_headers
 LOCAL_CFLAGS += -DWCNSS_QMI
 LOCAL_SRC_FILES += wcnss_qmi_client.c
 
