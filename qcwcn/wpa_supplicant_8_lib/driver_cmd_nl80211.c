@@ -95,7 +95,7 @@ static int wpa_driver_cmd_set_ani_level(struct i802_bss *bss, int mode, int ofdm
 		}
 	}
 	nla_nest_end(msg, params);
-#ifndef CONFIG_ANDROID_S
+#ifndef CONFIG_ANDROID_T
 	ret = send_and_recv_msgs(drv, msg, NULL, NULL);
 #else
 	ret = send_and_recv_msgs(drv, msg, NULL, NULL, NULL, NULL);
@@ -156,7 +156,7 @@ static int wpa_driver_cmd_set_congestion_report(struct i802_bss *bss, char *cmd)
 		}
 	}
 	nla_nest_end(msg, params);
-#ifndef CONFIG_ANDROID_S
+#ifndef CONFIG_ANDROID_T
 	ret = send_and_recv_msgs(drv, msg, NULL, NULL);
 #else
 	ret = send_and_recv_msgs(drv, msg, NULL, NULL, NULL, NULL);
@@ -198,7 +198,7 @@ static int wpa_driver_cmd_set_tx_power(struct i802_bss *bss, char *cmd)
 		return -ENOBUFS;
 	}
 
-#ifndef CONFIG_ANDROID_S
+#ifndef CONFIG_ANDROID_T
 	ret = send_and_recv_msgs(drv, msg, NULL, NULL);
 #else
 	ret = send_and_recv_msgs(drv, msg, NULL, NULL, NULL, NULL);
@@ -1998,7 +1998,7 @@ static int wpa_driver_cmd_get_thermal_info(struct i802_bss *bss, int *result, in
 	}
 
 	nla_nest_end(msg, params);
-#ifndef CONFIG_ANDROID_S
+#ifndef CONFIG_ANDROID_T
 	ret = send_and_recv_msgs(drv, msg, thermal_info_handler, result);
 #else
 	ret = send_and_recv_msgs(drv, msg, thermal_info_handler, result, NULL, NULL);
